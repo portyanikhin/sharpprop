@@ -4,9 +4,13 @@
   "tools": {
     "csharpier": {
       "version": "1.2.6",
-      "commands": [
-        "csharpier"
-      ]
+      "commands": ["csharpier"],
+      "rollForward": false
+    },
+    "dotnet-reportgenerator-globaltool": {
+      "version": "5.5.10",
+      "commands": ["reportgenerator"],
+      "rollForward": false
     }
   }
 }
