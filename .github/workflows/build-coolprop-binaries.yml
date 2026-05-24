@@ -72,7 +72,7 @@ jobs:
         with:
           name: CoolProp ${{ github.event.inputs.coolprop_version }} (${{ matrix.rid }})
           path: |
-            *.dll
+            Release/*.dll
             *.dylib
             *.so
             platform-independent.7z
