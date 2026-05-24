@@ -27,12 +27,24 @@ jobs:
 
   tests:
     needs: [fmt]
-    name: Tests / ${{ matrix.os }}
+    name: Tests / ${{ matrix.rid }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
     strategy:
       matrix:
-        os: [windows-latest, macos-15-intel, ubuntu-latest]
+        include:
+          - os: ubuntu-24.04-arm
+            rid: linux-aarch64
+          - os: ubuntu-latest
+            rid: linux-x86-64
+          - os: macos-latest
+            rid: macos-aarch64
+          - os: macos-15-intel
+            rid: macos-x86-64
+          - os: windows-11-arm
+            rid: windows-aarch64
+          - os: windows-latest
+            rid: windows-x86-64
 
     steps:
       - uses: actions/checkout@v6
