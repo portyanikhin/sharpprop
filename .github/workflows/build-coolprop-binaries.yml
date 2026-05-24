@@ -1,4 +1,4 @@
-name: Build Binaries
+name: Build CoolProp binaries
 
 on:
   workflow_dispatch:
@@ -55,12 +55,6 @@ jobs:
         run: cmake . -DCOOLPROP_CSHARP_MODULE=ON -DCMAKE_BUILD_TYPE=Release
       - name: Build CoolProp Binaries
         run: cmake --build . --config Release
-      - name: Rename DLL
-        if: runner.os == 'Windows'
-        shell: bash
-        run: |
-          mv Release/CoolProp.dll ./
-          mv CoolProp.dll libCoolProp.dll
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
         with:
