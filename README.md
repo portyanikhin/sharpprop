@@ -44,8 +44,11 @@ Or go to [NuGet Gallery | SharpProp](https://www.nuget.org/packages/sharpprop) f
 
 ## Supported platforms
 
+- `Linux AArch64`
 - `Linux x86-64`
+- `macOS AArch64`
 - `macOS x86-64`
+- `Windows AArch64`
 - `Windows x86-64`
 
 ## Unit safety
