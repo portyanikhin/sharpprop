@@ -10,6 +10,7 @@
 ## Navigation
 
 - [How to install](#how-to-install)
+- [Supported platforms](#supported-platforms)
 - [Unit safety](#unit-safety)
 - [Project structure](#project-structure)
 - [List of properties](#list-of-properties)
@@ -39,6 +40,12 @@ dotnet add package SharpProp
 ```
 
 Or go to [NuGet Gallery | SharpProp](https://www.nuget.org/packages/SharpProp) for detailed instructions.
+
+## Supported platforms
+
+- `Linux x86-64`
+- `macOS x86-64`
+- `Windows x86-64`
 
 ## Unit safety
 
