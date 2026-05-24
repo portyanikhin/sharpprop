@@ -5,7 +5,7 @@
 [<img alt="CI" src="https://img.shields.io/github/actions/workflow/status/portyanikhin/SharpProp/ci.yml?style=for-the-badge&logo=githubactions&logoColor=ffffff&label=ci&labelColor=555555" height="22">](https://github.com/portyanikhin/SharpProp/actions/workflows/ci.yml)
 [<img alt="codecov" src="https://img.shields.io/codecov/c/github/portyanikhin/SharpProp?style=for-the-badge&logo=codecov&label=codecov&labelColor=555555" height="22">](https://app.codecov.io/gh/portyanikhin/SharpProp)
 
-[CoolProp](http://www.coolprop.org) wrapper for C#
+[CoolProp](https://www.coolprop.org) wrapper for C#
 
 ## Navigation
 
@@ -30,6 +30,7 @@
     - [Deep cloning](#deep-cloning)
     - [Adding other properties](#adding-other-properties)
     - [Adding other inputs](#adding-other-inputs)
+- [License](#license)
 
 ## How to install
 
@@ -448,3 +449,10 @@ Console.WriteLine(origin.Equals(clone)); // false
 
 - [An example for the `Fluid` and `Mixture`](https://github.com/portyanikhin/SharpProp/blob/main/tests/SharpProp.Tests/IO/InputExtended.cs)
 - [An example for the `HumidAir`](https://github.com/portyanikhin/SharpProp/blob/main/tests/SharpProp.Tests/IO/InputHumidAirExtended.cs)
+
+#### License
+
+<sup>
+This project is licensed under
+<a href="https://github.com/portyanikhin/SharpProp/blob/main/LICENSE">MIT License</a>.
+</sup>
