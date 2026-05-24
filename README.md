@@ -1,13 +1,11 @@
-# ![SharpProp](https://raw.githubusercontent.com/portyanikhin/SharpProp/master/images/header.png)
+# ![SharpProp](https://raw.githubusercontent.com/portyanikhin/SharpProp/main/images/header.png)
 
-[![Build & Tests](https://github.com/portyanikhin/SharpProp/actions/workflows/build-and-tests.yml/badge.svg)](https://github.com/portyanikhin/SharpProp/actions/workflows/build-and-tests.yml)
-[![CodeQL](https://github.com/portyanikhin/SharpProp/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/portyanikhin/SharpProp/actions/workflows/codeql-analysis.yml)
-[![NuGet](https://img.shields.io/nuget/v/SharpProp)](https://www.nuget.org/packages/SharpProp)
-![Platform](https://img.shields.io/badge/platform-win--64%20%7C%20mac--64%20%7C%20linux--64-lightgrey)
-[![License](https://img.shields.io/github/license/portyanikhin/SharpProp)](https://github.com/portyanikhin/SharpProp/blob/master/LICENSE)
-[![Codecov](https://codecov.io/gh/portyanikhin/SharpProp/branch/master/graph/badge.svg?token=P3JH3D1L0Q)](https://codecov.io/gh/portyanikhin/SharpProp)
+[<img alt="GitHub" src="https://img.shields.io/badge/github-8da0cb?style=for-the-badge&labelColor=555555&logo=github" height="22">](https://github.com/portyanikhin/SharpProp)
+[<img alt="nuget.org" src="https://img.shields.io/nuget/v/SharpProp?style=for-the-badge&logo=nuget&labelColor=555555&color=074199" height="22">](https://www.nuget.org/packages/SharpProp)
+[<img alt="CI" src="https://img.shields.io/github/actions/workflow/status/portyanikhin/SharpProp/ci.yml?style=for-the-badge&logo=githubactions&logoColor=ffffff&label=ci&labelColor=555555" height="22">](https://github.com/portyanikhin/SharpProp/actions/workflows/ci.yml)
+[<img alt="codecov" src="https://img.shields.io/codecov/c/github/portyanikhin/SharpProp?style=for-the-badge&logo=codecov&label=codecov&labelColor=555555" height="22">](https://app.codecov.io/gh/portyanikhin/SharpProp)
 
-Simple, full-featured, lightweight, cross-platform [CoolProp](http://www.coolprop.org) wrapper for C#
+[CoolProp](http://www.coolprop.org) wrapper for C#
 
 ## Navigation
 
@@ -436,10 +434,10 @@ Console.WriteLine(origin.Equals(clone)); // false
 
 ### Adding other properties
 
-- [An example for the `Fluid` and `Mixture`](https://github.com/portyanikhin/SharpProp/blob/master/tests/SharpProp.Tests/Fluids/FluidExtended.cs)
-- [An example for the `HumidAir`](https://github.com/portyanikhin/SharpProp/blob/master/tests/SharpProp.Tests/HumidAir/HumidAirExtended.cs)
+- [An example for the `Fluid` and `Mixture`](https://github.com/portyanikhin/SharpProp/blob/main/tests/SharpProp.Tests/Fluids/FluidExtended.cs)
+- [An example for the `HumidAir`](https://github.com/portyanikhin/SharpProp/blob/main/tests/SharpProp.Tests/HumidAir/HumidAirExtended.cs)
 
 ### Adding other inputs
 
-- [An example for the `Fluid` and `Mixture`](https://github.com/portyanikhin/SharpProp/blob/master/tests/SharpProp.Tests/IO/InputExtended.cs)
-- [An example for the `HumidAir`](https://github.com/portyanikhin/SharpProp/blob/master/tests/SharpProp.Tests/IO/InputHumidAirExtended.cs)
+- [An example for the `Fluid` and `Mixture`](https://github.com/portyanikhin/SharpProp/blob/main/tests/SharpProp.Tests/IO/InputExtended.cs)
+- [An example for the `HumidAir`](https://github.com/portyanikhin/SharpProp/blob/main/tests/SharpProp.Tests/IO/InputHumidAirExtended.cs)
