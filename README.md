@@ -1,9 +1,9 @@
 # SharpProp
 
-[<img alt="GitHub" src="https://img.shields.io/badge/github-8da0cb?style=for-the-badge&labelColor=555555&logo=github" height="22">](https://github.com/portyanikhin/SharpProp)
-[<img alt="nuget.org" src="https://img.shields.io/nuget/v/SharpProp?style=for-the-badge&logo=nuget&labelColor=555555&color=074199" height="22">](https://www.nuget.org/packages/SharpProp)
-[<img alt="CI" src="https://img.shields.io/github/actions/workflow/status/portyanikhin/SharpProp/ci.yml?style=for-the-badge&logo=githubactions&logoColor=ffffff&label=ci&labelColor=555555" height="22">](https://github.com/portyanikhin/SharpProp/actions/workflows/ci.yml)
-[<img alt="codecov" src="https://img.shields.io/codecov/c/github/portyanikhin/SharpProp?style=for-the-badge&logo=codecov&label=codecov&labelColor=555555" height="22">](https://app.codecov.io/gh/portyanikhin/SharpProp)
+[<img alt="GitHub" src="https://img.shields.io/badge/github-8da0cb?style=for-the-badge&labelColor=555555&logo=github" height="22">](https://github.com/portyanikhin/sharpprop)
+[<img alt="nuget.org" src="https://img.shields.io/nuget/v/sharpprop?style=for-the-badge&logo=nuget&labelColor=555555&color=074199" height="22">](https://www.nuget.org/packages/sharpprop)
+[<img alt="CI" src="https://img.shields.io/github/actions/workflow/status/portyanikhin/sharpprop/ci.yml?style=for-the-badge&logo=githubactions&logoColor=ffffff&label=ci&labelColor=555555" height="22">](https://github.com/portyanikhin/sharpprop/actions/workflows/ci.yml)
+[<img alt="codecov" src="https://img.shields.io/codecov/c/github/portyanikhin/sharpprop?style=for-the-badge&logo=codecov&label=codecov&labelColor=555555" height="22">](https://app.codecov.io/gh/portyanikhin/sharpprop)
 
 [CoolProp](https://www.coolprop.org) wrapper for C#
 
@@ -40,7 +40,7 @@ Add it via CLI:
 dotnet add package SharpProp
 ```
 
-Or go to [NuGet Gallery | SharpProp](https://www.nuget.org/packages/SharpProp) for detailed instructions.
+Or go to [NuGet Gallery | SharpProp](https://www.nuget.org/packages/sharpprop) for detailed instructions.
 
 ## Supported platforms
 
@@ -442,17 +442,17 @@ Console.WriteLine(origin.Equals(clone)); // false
 
 ### Adding other properties
 
-- [An example for the `Fluid` and `Mixture`](https://github.com/portyanikhin/SharpProp/blob/main/tests/SharpProp.Tests/Fluids/FluidExtended.cs)
-- [An example for the `HumidAir`](https://github.com/portyanikhin/SharpProp/blob/main/tests/SharpProp.Tests/HumidAir/HumidAirExtended.cs)
+- [An example for the `Fluid` and `Mixture`](https://github.com/portyanikhin/sharpprop/blob/main/tests/sharpprop.Tests/Fluids/FluidExtended.cs)
+- [An example for the `HumidAir`](https://github.com/portyanikhin/sharpprop/blob/main/tests/sharpprop.Tests/HumidAir/HumidAirExtended.cs)
 
 ### Adding other inputs
 
-- [An example for the `Fluid` and `Mixture`](https://github.com/portyanikhin/SharpProp/blob/main/tests/SharpProp.Tests/IO/InputExtended.cs)
-- [An example for the `HumidAir`](https://github.com/portyanikhin/SharpProp/blob/main/tests/SharpProp.Tests/IO/InputHumidAirExtended.cs)
+- [An example for the `Fluid` and `Mixture`](https://github.com/portyanikhin/sharpprop/blob/main/tests/SharpProp.Tests/IO/InputExtended.cs)
+- [An example for the `HumidAir`](https://github.com/portyanikhin/sharpprop/blob/main/tests/SharpProp.Tests/IO/InputHumidAirExtended.cs)
 
 #### License
 
 <sup>
 This project is licensed under
-<a href="https://github.com/portyanikhin/SharpProp/blob/main/LICENSE">MIT License</a>.
+<a href="https://github.com/portyanikhin/sharpprop/blob/main/LICENSE">MIT License</a>.
 </sup>
