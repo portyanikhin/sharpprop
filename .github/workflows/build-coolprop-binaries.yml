@@ -10,11 +10,23 @@ on:
 
 jobs:
   build-binaries:
-    name: ${{ matrix.os }}
+    name: ${{ matrix.rid }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-15-intel, macos-latest]
+        include:
+          - os: ubuntu-24.04-arm
+            rid: linux-aarch64
+          - os: ubuntu-latest
+            rid: linux-x86-64
+          - os: macos-latest
+            rid: macos-aarch64
+          - os: macos-15-intel
+            rid: macos-x86-64
+          - os: windows-11-arm
+            rid: windows-aarch64
+          - os: windows-latest
+            rid: windows-x86-64
       fail-fast: false
 
     steps:
@@ -58,7 +70,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: CoolProp ${{ github.event.inputs.coolprop_version }} (${{ matrix.os }})
+          name: CoolProp ${{ github.event.inputs.coolprop_version }} (${{ matrix.rid }})
           path: |
             *.dll
             *.dylib
