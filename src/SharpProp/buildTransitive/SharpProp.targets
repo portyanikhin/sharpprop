@@ -1,0 +1,82 @@
+<Project>
+  <PropertyGroup>
+    <SharpPropPackageRoot>$(MSBuildThisFileDirectory)..\</SharpPropPackageRoot>
+    <SharpPropNativeRidCandidate
+      Condition="'$(SharpPropNativeRidCandidate)' == '' and '$(RuntimeIdentifier)' != ''"
+      >$(RuntimeIdentifier)</SharpPropNativeRidCandidate
+    >
+    <SharpPropNativeRid
+      Condition="'$(SharpPropNativeRid)' == '' and '$(SharpPropNativeRidCandidate)' != ''
+      and Exists('$(SharpPropPackageRoot)runtimes\$(SharpPropNativeRidCandidate)\native')"
+      >$(SharpPropNativeRidCandidate)</SharpPropNativeRid
+    >
+    <SharpPropNativeRidCandidate
+      Condition="'$(SharpPropNativeRid)' == '' and '$(NETCoreSdkRuntimeIdentifier)' != ''"
+      >$(NETCoreSdkRuntimeIdentifier)</SharpPropNativeRidCandidate
+    >
+    <SharpPropNativeRid
+      Condition="'$(SharpPropNativeRid)' == '' and '$(SharpPropNativeRidCandidate)' != ''
+      and Exists('$(SharpPropPackageRoot)runtimes\$(SharpPropNativeRidCandidate)\native')"
+      >$(SharpPropNativeRidCandidate)</SharpPropNativeRid
+    >
+    <SharpPropOSArchitecture Condition="'$(SharpPropOSArchitecture)' == ''"
+      >$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)</SharpPropOSArchitecture
+    >
+  </PropertyGroup>
+
+  <PropertyGroup
+    Condition="'$(SharpPropNativeRid)' == '' and $([MSBuild]::IsOSPlatform('Windows'))
+    and '$(SharpPropOSArchitecture)' == 'X64'"
+  >
+    <SharpPropNativeRid>win-x64</SharpPropNativeRid>
+  </PropertyGroup>
+  <PropertyGroup
+    Condition="'$(SharpPropNativeRid)' == '' and $([MSBuild]::IsOSPlatform('Windows'))
+    and '$(SharpPropOSArchitecture)' == 'Arm64'"
+  >
+    <SharpPropNativeRid>win-arm64</SharpPropNativeRid>
+  </PropertyGroup>
+  <PropertyGroup
+    Condition="'$(SharpPropNativeRid)' == '' and $([MSBuild]::IsOSPlatform('Linux'))
+    and '$(SharpPropOSArchitecture)' == 'X64'"
+  >
+    <SharpPropNativeRid>linux-x64</SharpPropNativeRid>
+  </PropertyGroup>
+  <PropertyGroup
+    Condition="'$(SharpPropNativeRid)' == '' and $([MSBuild]::IsOSPlatform('Linux'))
+    and '$(SharpPropOSArchitecture)' == 'Arm64'"
+  >
+    <SharpPropNativeRid>linux-arm64</SharpPropNativeRid>
+  </PropertyGroup>
+  <PropertyGroup
+    Condition="'$(SharpPropNativeRid)' == '' and $([MSBuild]::IsOSPlatform('OSX'))
+    and '$(SharpPropOSArchitecture)' == 'X64'"
+  >
+    <SharpPropNativeRid>osx-x64</SharpPropNativeRid>
+  </PropertyGroup>
+  <PropertyGroup
+    Condition="'$(SharpPropNativeRid)' == '' and $([MSBuild]::IsOSPlatform('OSX'))
+    and '$(SharpPropOSArchitecture)' == 'Arm64'"
+  >
+    <SharpPropNativeRid>osx-arm64</SharpPropNativeRid>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(SharpPropNativeRid)' != ''">
+    <SharpPropNativeLibrary
+      Include="$(SharpPropPackageRoot)runtimes\$(SharpPropNativeRid)\native\*"
+      Condition="Exists('$(SharpPropPackageRoot)runtimes\$(SharpPropNativeRid)\native')"
+    />
+  </ItemGroup>
+
+  <Target
+    Name="SharpPropCopyNativeLibrary"
+    AfterTargets="Build"
+    Condition="'@(SharpPropNativeLibrary)' != ''"
+  >
+    <Copy
+      SourceFiles="@(SharpPropNativeLibrary)"
+      DestinationFolder="$(OutDir)"
+      SkipUnchangedFiles="true"
+    />
+  </Target>
+</Project>
