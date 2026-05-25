@@ -6,10 +6,13 @@
     <IsPackable>false</IsPackable>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
-    <TargetFrameworks>net48;net9.0;net10.0</TargetFrameworks>
-  </PropertyGroup>
-  <PropertyGroup Condition="!$([MSBuild]::IsOSPlatform('Windows'))">
+  <PropertyGroup>
     <TargetFrameworks>net9.0;net10.0</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup
+    Condition="$([MSBuild]::IsOSPlatform('Windows')) and
+    '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'"
+  >
+    <TargetFrameworks>net48;net9.0;net10.0</TargetFrameworks>
   </PropertyGroup>
 </Project>
