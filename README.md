@@ -187,7 +187,7 @@ For more information, see the XML documentation.
 
 To calculate the specific heat of saturated water vapor at _1 atm_:
 
-```c#
+```csharp
 using SharpProp;
 using UnitsNet.NumberExtensions.NumberToPressure;
 using UnitsNet.Units;
@@ -205,7 +205,7 @@ Console.WriteLine(
 To calculate the dynamic viscosity of propylene glycol aqueous solution
 with _60 %_ mass fraction at _100 kPa_ and _-20 °C_:
 
-```c#
+```csharp
 using SharpProp;
 using UnitsNet.NumberExtensions.NumberToPressure;
 using UnitsNet.NumberExtensions.NumberToRatio;
@@ -228,7 +228,7 @@ Console.WriteLine(
 To calculate the density of ethanol aqueous solution (with ethanol _40 %_ mass fraction)
 at _200 kPa_ and _277.15 K_:
 
-```c#
+```csharp
 using SharpProp;
 using UnitsNet;
 using UnitsNet.NumberExtensions.NumberToPressure;
@@ -253,7 +253,7 @@ Console.WriteLine(mixture.Density.ToUnit(DensityUnit.GramPerDeciliter)); // 88.3
 To calculate the wet bulb temperature of humid air
 at _300 m_ above sea level, _30 °C_ and _50 %_ relative humidity:
 
-```c#
+```csharp
 using SharpProp;
 using UnitsNet.NumberExtensions.NumberToLength;
 using UnitsNet.NumberExtensions.NumberToRelativeHumidity;
@@ -280,7 +280,7 @@ Exactly the same way you can compare inputs (`Input`, `InputHumidAir` or any `IK
 
 For example:
 
-```c#
+```csharp
 using SharpProp;
 using UnitsNet.NumberExtensions.NumberToPressure;
 using UnitsNet.NumberExtensions.NumberToRelativeHumidity;
@@ -304,7 +304,7 @@ Console.WriteLine(humidAir.Equals(sameHumidAir)); // true
 The `Fluid`, `Mixture` and `HumidAir` classes have the `AsJson` method, which converts the instance
 to a JSON string. For example, converting a `Fluid` instance to an _indented_ JSON string:
 
-```c#
+```csharp
 using SharpProp;
 using UnitsNet.NumberExtensions.NumberToTemperature;
 
@@ -425,7 +425,7 @@ As a result:
 The `Fluid`, `Mixture` and `HumidAir` classes have the `Clone` method,
 which performs a deep (full) copy of the instance:
 
-```c#
+```csharp
 using SharpProp;
 using UnitsNet.NumberExtensions.NumberToPressure;
 using UnitsNet.NumberExtensions.NumberToTemperature;
