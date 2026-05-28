@@ -40,9 +40,9 @@ internal static class SwigExceptions
     private static readonly ExceptionArgumentDelegate ArgumentOutOfRangeDelegate =
         SetPendingArgumentOutOfRangeException;
 
-    static SwigExceptions()
+    internal static void RegisterExceptionCallbacks()
     {
-        RegisterExceptionCallbacks(
+        RegisterExceptionCallbacksNative(
             ApplicationDelegate,
             ArithmeticDelegate,
             DivideByZeroDelegate,
@@ -55,7 +55,7 @@ internal static class SwigExceptions
             OverflowDelegate,
             SystemDelegate
         );
-        RegisterExceptionArgumentCallbacks(
+        RegisterExceptionArgumentCallbacksNative(
             ArgumentDelegate,
             ArgumentNullDelegate,
             ArgumentOutOfRangeDelegate
@@ -111,7 +111,7 @@ internal static class SwigExceptions
     }
 
     [DllImport(Library.Name, EntryPoint = "SWIGRegisterExceptionCallbacks_CoolProp")]
-    private static extern void RegisterExceptionCallbacks(
+    private static extern void RegisterExceptionCallbacksNative(
         ExceptionDelegate applicationDelegate,
         ExceptionDelegate arithmeticDelegate,
         ExceptionDelegate divideByZeroDelegate,
@@ -126,7 +126,7 @@ internal static class SwigExceptions
     );
 
     [DllImport(Library.Name, EntryPoint = "SWIGRegisterExceptionArgumentCallbacks_CoolProp")]
-    private static extern void RegisterExceptionArgumentCallbacks(
+    private static extern void RegisterExceptionArgumentCallbacksNative(
         ExceptionArgumentDelegate argumentDelegate,
         ExceptionArgumentDelegate argumentNullDelegate,
         ExceptionArgumentDelegate argumentOutOfRangeDelegate

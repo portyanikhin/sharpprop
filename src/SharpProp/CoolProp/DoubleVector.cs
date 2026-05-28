@@ -5,13 +5,12 @@ namespace SharpProp;
 [ExcludeFromCodeCoverage]
 public class DoubleVector : IList<double>, IDisposable
 {
-    private static readonly object CollectionLock = new();
     private bool _disposed;
 
     private DoubleVector(IntPtr pointer) => Handle = new HandleRef(this, pointer);
 
     public DoubleVector(IEnumerable<double> collection)
-        : this(DoubleVectorPInvoke.Create())
+        : this(CoolPropLock.Invoke(DoubleVectorPInvoke.Create))
     {
         foreach (var item in collection)
         {
@@ -23,14 +22,6 @@ public class DoubleVector : IList<double>, IDisposable
 
     public void Dispose()
     {
-        lock (CollectionLock)
-        {
-            if (_disposed)
-            {
-                return;
-            }
-        }
-
         InternalDispose();
         GC.SuppressFinalize(this);
     }
@@ -45,41 +36,39 @@ public class DoubleVector : IList<double>, IDisposable
         set => SetItem(index, value);
     }
 
-    public int Count => (int)DoubleVectorPInvoke.Size(Handle);
+    public int Count => (int)CoolPropLock.Invoke(() => DoubleVectorPInvoke.Size(Handle));
 
     public void CopyTo(double[] array, int arrayIndex) => CopyTo(0, array, arrayIndex, Count);
 
     IEnumerator<double> IEnumerable<double>.GetEnumerator() => new DoubleVectorEnumerator(this);
 
-    public void Clear() => DoubleVectorPInvoke.Clear(Handle);
+    public void Clear() => CoolPropLock.Invoke(() => DoubleVectorPInvoke.Clear(Handle));
 
-    public void Add(double item) => DoubleVectorPInvoke.Add(Handle, item);
+    public void Add(double item) =>
+        CoolPropLock.Invoke(() => DoubleVectorPInvoke.Add(Handle, item));
 
-    public void Insert(int index, double item)
-    {
-        DoubleVectorPInvoke.Insert(Handle, index, item);
-        SwigExceptions.ThrowPendingException();
-    }
+    public void Insert(int index, double item) =>
+        CoolPropLock.Invoke(() => DoubleVectorPInvoke.Insert(Handle, index, item));
 
-    public void RemoveAt(int index)
-    {
-        DoubleVectorPInvoke.RemoveAt(Handle, index);
-        SwigExceptions.ThrowPendingException();
-    }
+    public void RemoveAt(int index) =>
+        CoolPropLock.Invoke(() => DoubleVectorPInvoke.RemoveAt(Handle, index));
 
-    public bool Contains(double item) => DoubleVectorPInvoke.Contains(Handle, item);
+    public bool Contains(double item) =>
+        CoolPropLock.Invoke(() => DoubleVectorPInvoke.Contains(Handle, item));
 
-    public int IndexOf(double item) => DoubleVectorPInvoke.IndexOf(Handle, item);
+    public int IndexOf(double item) =>
+        CoolPropLock.Invoke(() => DoubleVectorPInvoke.IndexOf(Handle, item));
 
-    public bool Remove(double item) => DoubleVectorPInvoke.Remove(Handle, item);
+    public bool Remove(double item) =>
+        CoolPropLock.Invoke(() => DoubleVectorPInvoke.Remove(Handle, item));
 
     ~DoubleVector() => InternalDispose();
 
     private void InternalDispose()
     {
-        lock (CollectionLock)
+        CoolPropLock.Invoke(() =>
         {
-            if (Handle.Handle == IntPtr.Zero)
+            if (_disposed || Handle.Handle == IntPtr.Zero)
             {
                 return;
             }
@@ -87,7 +76,7 @@ public class DoubleVector : IList<double>, IDisposable
             DoubleVectorPInvoke.Delete(Handle);
             Handle = new HandleRef(null, IntPtr.Zero);
             _disposed = true;
-        }
+        });
     }
 
     private void CopyTo(int index, double[] array, int arrayIndex, int count)
@@ -128,25 +117,14 @@ public class DoubleVector : IList<double>, IDisposable
         }
     }
 
-    private double GetItemCopy(int index)
-    {
-        var result = DoubleVectorPInvoke.GetItemCopy(Handle, index);
-        SwigExceptions.ThrowPendingException();
-        return result;
-    }
+    private double GetItemCopy(int index) =>
+        CoolPropLock.Invoke(() => DoubleVectorPInvoke.GetItemCopy(Handle, index));
 
-    private double GetItem(int index)
-    {
-        var result = DoubleVectorPInvoke.GetItem(Handle, index);
-        SwigExceptions.ThrowPendingException();
-        return result;
-    }
+    private double GetItem(int index) =>
+        CoolPropLock.Invoke(() => DoubleVectorPInvoke.GetItem(Handle, index));
 
-    private void SetItem(int index, double item)
-    {
-        DoubleVectorPInvoke.SetItem(Handle, index, item);
-        SwigExceptions.ThrowPendingException();
-    }
+    private void SetItem(int index, double item) =>
+        CoolPropLock.Invoke(() => DoubleVectorPInvoke.SetItem(Handle, index, item));
 
     private sealed class DoubleVectorEnumerator : IEnumerator<double>
     {

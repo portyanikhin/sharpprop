@@ -5,7 +5,6 @@ namespace SharpProp;
 [ExcludeFromCodeCoverage]
 public class AbstractState : IDisposable
 {
-    private static readonly object HandlesLock = new();
     private bool _disposed;
     private HandleRef _handle;
 
@@ -13,14 +12,6 @@ public class AbstractState : IDisposable
 
     public void Dispose()
     {
-        lock (HandlesLock)
-        {
-            if (_disposed)
-            {
-                return;
-            }
-        }
-
         InternalDispose();
         GC.SuppressFinalize(this);
     }
@@ -29,9 +20,9 @@ public class AbstractState : IDisposable
 
     private void InternalDispose()
     {
-        lock (HandlesLock)
+        CoolPropLock.Invoke(() =>
         {
-            if (_handle.Handle == IntPtr.Zero)
+            if (_disposed || _handle.Handle == IntPtr.Zero)
             {
                 return;
             }
@@ -39,46 +30,37 @@ public class AbstractState : IDisposable
             AbstractStatePInvoke.Delete(_handle);
             _handle = new HandleRef(null, IntPtr.Zero);
             _disposed = true;
-        }
+        });
     }
 
     public static AbstractState Factory(string backend, string fluidNames)
     {
-        lock (HandlesLock)
-        {
-            var pointer = AbstractStatePInvoke.Factory(backend, fluidNames);
-            var abstractState = new AbstractState(pointer);
-            SwigExceptions.ThrowPendingException();
-            return abstractState;
-        }
+        var pointer = CoolPropLock.Invoke(() => AbstractStatePInvoke.Factory(backend, fluidNames));
+        return new AbstractState(pointer);
     }
 
-    public void SetMassFractions(DoubleVector massFractions)
-    {
-        AbstractStatePInvoke.SetMassFractions(_handle, massFractions.Handle);
-        SwigExceptions.ThrowPendingException();
-    }
+    public void SetMassFractions(DoubleVector massFractions) =>
+        CoolPropLock.Invoke(() =>
+            AbstractStatePInvoke.SetMassFractions(_handle, massFractions.Handle)
+        );
 
-    // ReSharper disable once UnusedMember.Global
-    public void SetMoleFractions(DoubleVector moleFractions)
-    {
-        AbstractStatePInvoke.SetMoleFractions(_handle, moleFractions.Handle);
-        SwigExceptions.ThrowPendingException();
-    }
+    public void SetMoleFractions(DoubleVector moleFractions) =>
+        CoolPropLock.Invoke(() =>
+            AbstractStatePInvoke.SetMoleFractions(_handle, moleFractions.Handle)
+        );
 
-    public void SetVolumeFractions(DoubleVector volumeFractions)
-    {
-        AbstractStatePInvoke.SetVolumeFractions(_handle, volumeFractions.Handle);
-        SwigExceptions.ThrowPendingException();
-    }
+    public void SetVolumeFractions(DoubleVector volumeFractions) =>
+        CoolPropLock.Invoke(() =>
+            AbstractStatePInvoke.SetVolumeFractions(_handle, volumeFractions.Handle)
+        );
 
     public static InputPairs? GetInputPair(string inputPairName)
     {
         try
         {
-            var result = (InputPairs)AbstractStatePInvoke.GetInputPairIndex(inputPairName);
-            SwigExceptions.ThrowPendingException();
-            return result;
+            return CoolPropLock.Invoke(() =>
+                (InputPairs)AbstractStatePInvoke.GetInputPairIndex(inputPairName)
+            );
         }
         catch
         {
@@ -86,34 +68,19 @@ public class AbstractState : IDisposable
         }
     }
 
-    public void Update(InputPairs inputPair, double firstInput, double secondInput)
-    {
-        AbstractStatePInvoke.Update(_handle, (int)inputPair, firstInput, secondInput);
-        SwigExceptions.ThrowPendingException();
-    }
+    public void Update(InputPairs inputPair, double firstInput, double secondInput) =>
+        CoolPropLock.Invoke(() =>
+            AbstractStatePInvoke.Update(_handle, (int)inputPair, firstInput, secondInput)
+        );
 
-    public void Clear()
-    {
-        AbstractStatePInvoke.Clear(_handle);
-        SwigExceptions.ThrowPendingException();
-    }
+    public void Clear() => CoolPropLock.Invoke(() => AbstractStatePInvoke.Clear(_handle));
 
-    public void SpecifyPhase(Phases phase)
-    {
-        AbstractStatePInvoke.SpecifyPhase(_handle, (int)phase);
-        SwigExceptions.ThrowPendingException();
-    }
+    public void SpecifyPhase(Phases phase) =>
+        CoolPropLock.Invoke(() => AbstractStatePInvoke.SpecifyPhase(_handle, (int)phase));
 
-    public void UnspecifyPhase()
-    {
-        AbstractStatePInvoke.UnspecifyPhase(_handle);
-        SwigExceptions.ThrowPendingException();
-    }
+    public void UnspecifyPhase() =>
+        CoolPropLock.Invoke(() => AbstractStatePInvoke.UnspecifyPhase(_handle));
 
-    public double KeyedOutput(Parameters key)
-    {
-        var result = AbstractStatePInvoke.KeyedOutput(_handle, (int)key);
-        SwigExceptions.ThrowPendingException();
-        return result;
-    }
+    public double KeyedOutput(Parameters key) =>
+        CoolPropLock.Invoke(() => AbstractStatePInvoke.KeyedOutput(_handle, (int)key));
 }
