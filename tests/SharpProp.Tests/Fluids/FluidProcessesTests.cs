@@ -2,7 +2,6 @@ using UnitsNet.NumberExtensions.NumberToRatio;
 
 namespace SharpProp.Tests;
 
-[Collection("Fluids")]
 public class FluidProcessesTests : IDisposable
 {
     private static readonly Ratio IsentropicEfficiency = 80.Percent();

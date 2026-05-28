@@ -2,7 +2,6 @@ using UnitsNet.NumberExtensions.NumberToRatio;
 
 namespace SharpProp.Tests;
 
-[Collection("Fluids")]
 public class TestHumidAirProcesses
 {
     private static readonly TemperatureDelta TemperatureDelta = TemperatureDelta.FromKelvins(5);

@@ -2,7 +2,6 @@ using UnitsNet.NumberExtensions.NumberToRelativeHumidity;
 
 namespace SharpProp.Tests;
 
-[Collection("Fluids")]
 public class HumidAirTests
 {
     private const double Tolerance = 1e-9;

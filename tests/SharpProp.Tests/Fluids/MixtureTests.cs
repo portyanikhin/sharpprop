@@ -2,7 +2,6 @@ using UnitsNet.NumberExtensions.NumberToRatio;
 
 namespace SharpProp.Tests;
 
-[Collection("Fluids")]
 public class MixtureTests : IDisposable
 {
     private readonly IMixture _mixture = new Mixture(

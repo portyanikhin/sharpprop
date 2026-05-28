@@ -2,7 +2,6 @@ using UnitsNet.NumberExtensions.NumberToRatio;
 
 namespace SharpProp.Tests;
 
-[Collection("Fluids")]
 public class FluidTests : IDisposable
 {
     private const double Tolerance = 1e-9;
