@@ -5,10 +5,6 @@ namespace SharpProp;
 [ExcludeFromCodeCoverage]
 public static class CoolProp
 {
-    private static readonly object LibraryLock = new();
-
-    static CoolProp() => SwigStrings.RegisterStringCallback();
-
     public static double PropsSI(
         string outputKey,
         string firstInputKey,
@@ -18,19 +14,16 @@ public static class CoolProp
         string fluidName
     )
     {
-        lock (LibraryLock)
-        {
-            var result = CoolPropPInvoke.PropsSI(
+        return CoolPropLock.Invoke(() =>
+            CoolPropPInvoke.PropsSI(
                 outputKey,
                 firstInputKey,
                 firstInputValue,
                 secondInputKey,
                 secondInputValue,
                 fluidName
-            );
-            SwigExceptions.ThrowPendingException();
-            return result;
-        }
+            )
+        );
     }
 
     public static double HAPropsSI(
@@ -43,9 +36,8 @@ public static class CoolProp
         double thirdInputValue
     )
     {
-        lock (LibraryLock)
-        {
-            var result = CoolPropPInvoke.HAPropsSI(
+        return CoolPropLock.Invoke(() =>
+            CoolPropPInvoke.HAPropsSI(
                 outputKey,
                 firstInputKey,
                 firstInputValue,
@@ -53,29 +45,13 @@ public static class CoolProp
                 secondInputValue,
                 thirdInputKey,
                 thirdInputValue
-            );
-            SwigExceptions.ThrowPendingException();
-            return result;
-        }
+            )
+        );
     }
 
-    public static string GetGlobalParamString(string paramName)
-    {
-        lock (LibraryLock)
-        {
-            var result = CoolPropPInvoke.GetGlobalParamString(paramName);
-            SwigExceptions.ThrowPendingException();
-            return result;
-        }
-    }
+    public static string GetGlobalParamString(string paramName) =>
+        CoolPropLock.Invoke(() => CoolPropPInvoke.GetGlobalParamString(paramName));
 
-    public static string GetFluidParamString(string fluidName, string paramName)
-    {
-        lock (LibraryLock)
-        {
-            var result = CoolPropPInvoke.GetFluidParamString(fluidName, paramName);
-            SwigExceptions.ThrowPendingException();
-            return result;
-        }
-    }
+    public static string GetFluidParamString(string fluidName, string paramName) =>
+        CoolPropLock.Invoke(() => CoolPropPInvoke.GetFluidParamString(fluidName, paramName));
 }

@@ -6,7 +6,7 @@ internal static class SwigStrings
     private delegate string SwigStringDelegate(string message);
     private static readonly SwigStringDelegate StringDelegate = CreateString;
 
-    public static void RegisterStringCallback() =>
+    internal static void RegisterStringCallback() =>
         SWIGRegisterStringCallback_CoolProp(StringDelegate);
 
     [DllImport(Library.Name, EntryPoint = "SWIGRegisterStringCallback_CoolProp")]
