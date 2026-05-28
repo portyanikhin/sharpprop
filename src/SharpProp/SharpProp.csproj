@@ -61,15 +61,4 @@
     <PackageReference Include="UnitsNet.Serialization.JsonNet" Version="5.50.0" />
     <PackageReference Include="UnitsNet.NumberExtensions" Version="5.75.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Update="**\*.cs">
-      <DependentUpon>$([System.String]::Copy(I%(Filename).cs))</DependentUpon>
-    </Compile>
-    <Compile Update="IO\Input.cs">
-      <DependentUpon>KeyedInput.cs</DependentUpon>
-    </Compile>
-    <Compile Update="IO\InputHumidAir.cs">
-      <DependentUpon>KeyedInput.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
 </Project>
